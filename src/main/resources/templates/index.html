@@ -29,7 +29,8 @@
                 </li>
                 <li class="dropdown" th:if="${session.user != null}">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                    th:text="${session.user.getName()}">我 <b class="caret"></b></a>
+                    >我<b class="caret"></b></a>
+                    <!--th:text="${session.user.getName()}"-->
                     <ul class="dropdown-menu">
                         <li><a href="#">消息中心</a></li>
                         <li><a href="#">个人资料</a></li>

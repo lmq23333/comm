@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+/**
+ * GithubPrivider
+ * @author lmq
+ */
 @Component
 public class GithubPrivider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO){
