@@ -10,9 +10,9 @@ public class User {
      **/
     private String name;
     /**
-     * accountId
+     * account_id
      **/
-    private String accountId;
+    private String account_id;
     /**
      * token
      **/
@@ -20,11 +20,11 @@ public class User {
     /**
      * gmtCreate
      **/
-    private Long gmtCreate;
+    private Long gmt_create;
     /**
      * gmtModified
      **/
-    private Long gmtModified;
+    private Long gmt_modified;
 
     /**
       * getId
@@ -68,7 +68,7 @@ public class User {
       * @date 2019/8/8 11:20
       **/
     public String getAccountId() {
-        return accountId;
+        return account_id;
     }
 
     /**
@@ -77,8 +77,8 @@ public class User {
      * @return
      * @date 2019/8/8 11:17
      **/
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setAccountId(String account_id) {
+        this.account_id = account_id;
     }
 
     /**
@@ -105,16 +105,16 @@ public class User {
       * @date 2019/8/8 11:21
       **/
     public Long getGmtCreate() {
-        return gmtCreate;
+        return gmt_create;
     }
 
     /**
       * setGmtCreate
-      * @param gmtCreate
+      * @param gmt_create
       * @date 2019/8/8 11:21
       **/
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
+    public void setGmtCreate(Long gmt_create) {
+        this.gmt_create = gmt_create;
     }
 
     /**
@@ -123,16 +123,16 @@ public class User {
       * @date 2019/8/8 11:21
       **/
     public Long getGmtModified() {
-        return gmtModified;
+        return gmt_modified;
     }
 
     /**
       * setGmtModified
-      * @param gmtModified
+      * @param gmt_modified
       * @date 2019/8/8 11:21
       **/
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
+    public void setGmtModified(Long gmt_modified) {
+        this.gmt_modified = gmt_modified;
     }
 
     /**
@@ -145,10 +145,10 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", accountId='" + accountId + '\'' +
+                ", accountId='" + account_id + '\'' +
                 ", token='" + token + '\'' +
-                ", gmtCreate=" + gmtCreate +
-                ", gmtModified=" + gmtModified +
+                ", gmtCreate=" + gmt_create +
+                ", gmtModified=" + gmt_modified +
                 '}';
     }
 }
