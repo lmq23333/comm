@@ -25,4 +25,12 @@ public interface UserMapper {
      * @return
      */
     User findByToken(@Param("token") String token);
+
+    /**
+     * findById
+     * @param creator
+     * @return User
+     * @date 2019/8/9 17:00
+     **/
+    User findById(Integer creator);
 }

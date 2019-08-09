@@ -80,8 +80,7 @@ public class PublicController {
         question.setTag(tag);
         question.setCreator(user.getId());
         question.setGmtCreate(System.currentTimeMillis());
-        question.setGmtModified(user.getGmtCreate());
-        System.out.println(question);
+        question.setGmtModified(user.getGmt_create());
         questionMapper.create(question);
         return "redirect:/";
 

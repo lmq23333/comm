@@ -2,10 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.coffee.comm.dao.UserMapper">
     <insert id="insertUser" parameterType="com.coffee.comm.model.User">
-        insert into user(name,account_id,token,gmt_create,gmt_modified)
-        values(#{name},#{accountId},#{token},#{gmtCreate},#{gmtModified});
+        insert into user(name,account_id,token,gmt_create,gmt_modified,bio,avatar_url)
+        values(#{name},#{account_id},#{token},#{gmt_create},#{gmt_modified},#{bio},#{avatar_url});
     </insert>
     <select id="findByToken" parameterType="String" resultType="com.coffee.comm.model.User">
         select * from user where token = #{token};
+    </select>
+    <select id="findById" parameterType="Integer" resultType="com.coffee.comm.model.User">
+        select * from user where id = #{creator};
     </select>
 </mapper>

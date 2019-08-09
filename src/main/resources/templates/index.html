@@ -1,50 +1,77 @@
 <!DOCTYPE html>
-<html  xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>社区</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css" />
-    <script src="js/bootstrap.min.js" type="application/javascript" ></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/comm.css"/>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
-    <nav class="navbar navbar-default" role="navigation" id="top">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">社区</span>
-            </button>
-            <a class="navbar-brand" href="#">社区</a>
-        </div>
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="搜索问题">
+<nav class="navbar navbar-default" role="navigation" id="top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">社区</span>
+        </button>
+        <a class="navbar-brand" href="/index">社区</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="搜索问题">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li th:if="${session.user != null}" style="margin-right: 20px;">
+                <a href="/publish">发布</a>
+            </li>
+            <li th:if="${session.user == null}">
+                <a href="https://github.com/login/oauth/authorize?client_id=c68c5e6098bc4bf14152&redirect_uri=http://localhost:8080/callback&scope=user&state=2">登录</a>
+            </li>
+            <li class="dropdown" th:if="${session.user != null}">
+                <img th:src="${session.user.getAvatar_url()}"
+                     style="width: 40px; length:40px; border-radius:30px; margin-top: 5px;  border: 1px solid darkseagreen;">
+            </li>
+            <li class="dropdown" th:if="${session.user != null}">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                   th:text="${session.user.getName()}">我<b class="caret"></b></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="#">消息中心</a></li>
+                    <li><a href="#">个人资料</a></li>
+                    <li><a href="#">退出登录</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">发现</span></h2>
+            <hr/>
+            <div class="media" th:each="question :${questionList}">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object img-rounded"
+                             th:src="${question.user.getAvatar_url()}">
+                    </a>
                 </div>
-                <button type="submit" class="btn btn-default">搜索</button>
-            </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li th:if="${session.user != null}">
-                    <a href="/publish">发布</a>
-                </li>
-                <li th:if="${session.user == null}">
-                    <a href="https://github.com/login/oauth/authorize?client_id=c68c5e6098bc4bf14152&redirect_uri=http://localhost:8080/callback&scope=user&state=2">登录</a>
-                </li>
-                <li class="dropdown" th:if="${session.user != null}">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                    th:text="${session.user.getName()}">我<b class="caret"></b></a>
 
-                    <ul class="dropdown-menu">
-                        <li><a href="#">消息中心</a></li>
-                        <li><a href="#">个人资料</a></li>
-                        <li><a href="#">退出登录</a></li>
-                    </ul>
-                </li>
-                <li>
+                <div class="media-body">
+                    <h4 class="media-heading">[[${question.getTitle()}]]</h4>
+                    <span >[[${question.getDescription()}]]</span>
+                    <br>
+                    <span class="text-desc" >[[${question.getCommentCount()}]] 个回复 · [[${question.getViewCount()}]] 次浏览 ·[[${date}]]</span>
+                </div>
 
-                </li>
-            </ul>
+            </div>
         </div>
-    </nav>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"><h2>热门话题</h2>别看啦，没有话题...</div>
+    </div>
+</div>
 </body>
 </html>
