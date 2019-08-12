@@ -65,9 +65,8 @@
                     <h4 class="media-heading">[[${question.getTitle()}]]</h4>
                     <span >[[${question.getDescription()}]]</span>
                     <br>
-                    <span class="text-desc" >[[${question.getCommentCount()}]] 个回复 · [[${question.getViewCount()}]] 次浏览 ·[[${date}]]</span>
+                    <span class="text-desc" >[[${question.getCommentCount()}]] 个回复 · [[${question.getViewCount()}]] 次浏览 ·[[${#dates.format(question.getGmtCreate(),'yyyy-MM-dd')}]]</span>
                 </div>
-
             </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"><h2>热门话题</h2>别看啦，没有话题...</div>
