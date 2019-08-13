@@ -1,11 +1,11 @@
 package com.coffee.comm.dao;
 
-import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 /**
   * QuestionMapper
@@ -26,6 +26,13 @@ public interface QuestionMapper {
      * findAllQuestion
      * @return  List<Question>
      * @date 2019/8/8 16:23
-     **/
-    List<Question> findAllQuestion();
+     *
+     * @param map*/
+    List<Question> findAllQuestion(Map map);
+
+    /**
+     *  totalCount
+     * @return int
+     */
+    int totalCount();
 }

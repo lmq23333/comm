@@ -5,7 +5,10 @@
         insert into question(title,description,gmtCreate,gmtModified,creator,commentCount,viewCount,likeCount,tag)
         values(#{title},#{description},#{gmtCreate},#{gmtModified},#{creator},#{commentCount},#{viewCount},#{likeCount},#{tag});
     </insert>
-    <select id="findAllQuestion" resultType="com.coffee.comm.model.Question">
-        select * from question;
+    <select id="findAllQuestion" parameterType="map" resultType="com.coffee.comm.model.Question">
+        select * from question limit #{page},#{size};
+    </select>
+    <select id="totalCount"  resultType="Integer">
+        select count(1) from question ;
     </select>
 </mapper>

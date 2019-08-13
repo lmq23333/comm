@@ -1,7 +1,6 @@
 package com.coffee.comm.service.Impl;
 
 import com.coffee.comm.dao.QuestionMapper;
-import com.coffee.comm.dao.UserMapper;
 import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
 import com.coffee.comm.model.User;
@@ -11,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * QuestionServiceImpl
@@ -31,8 +32,13 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<QuestionDTO> list() {
-        List<Question> questions = questionMapper.findAllQuestion();
+    public List<QuestionDTO> list(Integer page, Integer size) {
+        page = size*(page-1);
+        Map<String, Object> map = new HashMap();
+        map.put("page",page);
+        map.put("size" ,size);
+
+        List<Question> questions = questionMapper.findAllQuestion(map);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question:questions) {
             User u = userService.findById(question.getCreator());
@@ -42,5 +48,10 @@ public class QuestionServiceImpl implements QuestionService {
             questionDTOList.add(questionDTO);
         }
         return questionDTOList;
+    }
+
+    @Override
+    public int totalCount() {
+        return questionMapper.totalCount();
     }
 }

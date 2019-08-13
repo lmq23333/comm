@@ -22,6 +22,14 @@ public interface QuestionService {
       * list
       * @return List<Question>
       * @date 2019/8/9 16:48
-      **/
-    List<QuestionDTO> list();
+      *
+     * @param page
+     * @param size*/
+    List<QuestionDTO> list(Integer page, Integer size);
+
+    /**
+     * totalCount
+     * @return int
+     */
+    int totalCount();
 }

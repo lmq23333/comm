@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css"/>
     <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
     <link rel="stylesheet" href="css/comm.css"/>
+    <script src="js/jquery-3.4.1.min.js"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
@@ -37,7 +38,7 @@
             </li>
             <li class="dropdown" th:if="${session.user != null}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                   th:text="${session.user.getName()}">我<b class="caret"></b></a>
+                >[[${session.user.getName()}]]<span class="caret"></span></a>
 
                 <ul class="dropdown-menu">
                     <li><a href="#">消息中心</a></li>
@@ -53,7 +54,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">发现</span></h2>
             <hr/>
-            <div class="media" th:each="question :${questionList}">
+            <div class="media" th:each="question :${pagination.getQuestions()}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded"
@@ -63,14 +64,47 @@
 
                 <div class="media-body">
                     <h4 class="media-heading">[[${question.getTitle()}]]</h4>
-                    <span >[[${question.getDescription()}]]</span>
+                    <span>[[${question.getDescription()}]]</span>
                     <br>
-                    <span class="text-desc" >[[${question.getCommentCount()}]] 个回复 · [[${question.getViewCount()}]] 次浏览 ·[[${#dates.format(question.getGmtCreate(),'yyyy-MM-dd')}]]</span>
+                    <span class="text-desc">[[${question.getCommentCount()}]] 个回复 · [[${question.getViewCount()}]] 次浏览 ·[[${#dates.format(question.getGmtCreate(),'yyyy-MM-dd')}]]</span>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"><h2>热门话题</h2>别看啦，没有话题...</div>
     </div>
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            <li>
+                <a href="index?page=1" aria-label="Previous" th:if="${pagination.getShowFirstPage()}">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pagination">
+            <li>
+                <a th:href="@{'index?page='+${pagination.getPage()-1}}" th:if="${pagination.getShowPrevious()}" aria-label="Previous">
+                    <span aria-hidden="true">&lt;</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pagination" th:each="page : ${pagination.getPages()}">
+            <li><a th:href="@{'index?page='+${page}}">[[${page}]]</a></li>
+        </ul>
+        <ul class="pagination">
+            <li>
+                <a th:href="@{'index?page='+${pagination.getPage()+1}}" th:if="${pagination.getShowNext()}" aria-label="Previous">
+                    <span aria-hidden="true">&gt;</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="pagination">
+            <li>
+                <a th:href="@{'index?page='+${pagination.getTotalPage()}}" th:if="${pagination.getShowEndPage()}" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 </body>
 </html>
