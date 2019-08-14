@@ -61,4 +61,17 @@ public class PaginationDTO {
         }
     }
 
+    @Override
+    public String toString() {
+        return "PaginationDTO{" +
+                "questions=" + questions +
+                ", showPrevious=" + showPrevious +
+                ", showFirstPage=" + showFirstPage +
+                ", showNext=" + showNext +
+                ", showEndPage=" + showEndPage +
+                ", page=" + page +
+                ", totalPage=" + totalPage +
+                ", pages=" + pages +
+                '}';
+    }
 }

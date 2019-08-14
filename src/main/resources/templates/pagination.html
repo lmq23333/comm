@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<nav aria-label="Page navigation" id="pagination">
+    <ul class="pagination" th:if="${msg==null}">
+        <li>
+            <a href="index?page=1" aria-label="Previous" th:if="${pagination.getShowFirstPage()}">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'index?page='+${pagination.getPage()-1}}" th:if="${pagination.getShowPrevious()}" aria-label="Previous">
+                <span aria-hidden="true">&lt;</span>
+            </a>
+        </li>
+        <li th:each="page : ${pagination.getPages()}"  th:class="${pagination.page==page}?'active':''">
+            <a th:href="@{'index?page='+${page}}">[[${page}]]</a>
+        </li>
+        <li>
+            <a th:href="@{'index?page='+${pagination.getPage()+1}}" th:if="${pagination.getShowNext()}" aria-label="Previous">
+                <span aria-hidden="true">&gt;</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{'index?page='+${pagination.getTotalPage()}}" th:if="${pagination.getShowEndPage()}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="pagination" th:if="${msg!=null}">
+        <li>1</li>
+    </ul>
+</nav>
+</body>
+</html>

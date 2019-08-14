@@ -2,19 +2,20 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>社区</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" href="css/comm.css"/>
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+    <title>[[${sectionName}]]</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/css/comm.css"/>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
 </head>
 <body>
+
 <div th:replace="top::#top"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
-            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">发现</span></h2>
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${msg==null}">
+            <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">[[${sectionName}]]</span></h2>
             <hr/>
             <div class="media" th:each="question :${pagination.questions}">
                 <div class="media-left">
@@ -33,7 +34,10 @@
             </div>
             <div th:replace="pagination::#pagination"></div>
         </div>
-        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12"><h2>热门话题</h2>别看啦，没有话题...</div>
+        <div class="list-group col-lg-3 col-md-12 col-sm-12 col-xs-12" style="margin-top: 80px;">
+            <a href="/profile/questions"th:class="${sectionName=='我的问题'}?'list-group-item active':'list-group-item'">我的问题</a>
+            <a href="/profile/replies" th:class="${sectionName=='最新回复'}?'list-group-item active':'list-group-item'">最新回复</a>
+        </div>
     </div>
 </div>
 </body>

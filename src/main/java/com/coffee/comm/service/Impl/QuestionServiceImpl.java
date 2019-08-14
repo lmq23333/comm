@@ -1,6 +1,7 @@
 package com.coffee.comm.service.Impl;
 
 import com.coffee.comm.dao.QuestionMapper;
+import com.coffee.comm.dto.PaginationDTO;
 import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
 import com.coffee.comm.model.User;
@@ -31,14 +32,14 @@ public class QuestionServiceImpl implements QuestionService {
         questionMapper.create(question);
     }
 
-    @Override
-    public List<QuestionDTO> list(Integer page, Integer size) {
+    public Map turnToMap(Integer page, Integer size){
         page = size*(page-1);
         Map<String, Object> map = new HashMap();
         map.put("page",page);
         map.put("size" ,size);
-
-        List<Question> questions = questionMapper.findAllQuestion(map);
+        return map;
+    }
+    public List<QuestionDTO> turnToQuestionDTO(List<Question> questions){
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question:questions) {
             User u = userService.findById(question.getCreator());
@@ -49,9 +50,38 @@ public class QuestionServiceImpl implements QuestionService {
         }
         return questionDTOList;
     }
+    @Override
+    public List<QuestionDTO> list(Integer page, Integer size) {
+        Map<String, Object> map =turnToMap(page,size);
+        List<Question> questions = questionMapper.findAllQuestion(map);
+        return turnToQuestionDTO(questions);
+    }
+
 
     @Override
-    public int totalCount() {
-        return questionMapper.totalCount();
+    public PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId) {
+        Map map =turnToMap(page,size);
+        map.put("userId",userId);
+        List<Question> questionList =questionMapper.selectQuestionsByCreator(map);
+        List<QuestionDTO> questionDTOList = turnToQuestionDTO(questionList);
+        PaginationDTO pagination = new PaginationDTO();
+        Integer totalCount = questionMapper.totalCountById(userId);
+        pagination.setPagination(totalCount, page, size);
+        pagination.setQuestions(questionDTOList);
+        return pagination;
     }
-}
+
+    public PaginationDTO showIndexQuestion(Integer page, Integer size) {
+        List<QuestionDTO> questionList = list(page,size);
+        PaginationDTO pagination = new PaginationDTO();
+        int totalCount = totalCount();
+        pagination.setPagination(totalCount, page, size);
+        pagination.setQuestions(questionList);
+        return pagination;
+    }
+
+        @Override
+        public Integer totalCount () {
+            return questionMapper.totalCount();
+        }
+    }

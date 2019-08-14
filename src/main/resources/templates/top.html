@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+<nav class="navbar navbar-default" role="navigation" id="top">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse"
+                data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">社区</span>
+        </button>
+        <a class="navbar-brand" href="/index">社区</a>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+                <input type="text" class="form-control" placeholder="搜索问题">
+            </div>
+            <button type="submit" class="btn btn-default">搜索</button>
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li th:if="${session.user != null}" style="margin-right: 20px;">
+                <a href="/publish">发布</a>
+            </li>
+            <li th:if="${session.user == null}">
+                <a href="https://github.com/login/oauth/authorize?client_id=c68c5e6098bc4bf14152&redirect_uri=http://localhost:8080/callback&scope=user&state=2">登录</a>
+            </li>
+            <li class="dropdown" th:if="${session.user != null}">
+                <img th:src="${session.user.getAvatar_url()}"
+                     style="width: 40px; length:40px; border-radius:30px; margin-top: 5px;  border: 1px solid darkseagreen;">
+            </li>
+            <li class="dropdown" th:if="${session.user != null}">
+                <a  class="dropdown-toggle" data-toggle="dropdown"
+                >[[${session.user.getName()}]]<span class="caret"></span></a>
+
+                <ul class="dropdown-menu">
+                    <li><a href="/profile/questions">我的问题</a></li>
+                    <li><a href="/profile/replies">退出登录</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>
+</body>
+</html>

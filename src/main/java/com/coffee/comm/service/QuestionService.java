@@ -1,9 +1,11 @@
 package com.coffee.comm.service;
 
+import com.coffee.comm.dto.PaginationDTO;
 import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
 
 import java.util.List;
+import java.util.Map;
 
 /**
   *QuestionService
@@ -29,7 +31,11 @@ public interface QuestionService {
 
     /**
      * totalCount
-     * @return int
+     * @return Integer
      */
-    int totalCount();
+    Integer totalCount();
+
+    PaginationDTO showIndexQuestion(Integer page, Integer size);
+
+    PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId);
 }
