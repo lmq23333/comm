@@ -59,6 +59,16 @@ public class QuestionServiceImpl implements QuestionService {
 
 
     @Override
+    public QuestionDTO selectQuestionById(Integer id) {
+        Question question = questionMapper.selectQuestionById(id);
+        User u = userService.findById(question.getCreator());
+        QuestionDTO questionDTO = new QuestionDTO();
+        BeanUtils.copyProperties(question,questionDTO);
+        questionDTO.setUser(u);
+        return questionDTO;
+    }
+
+    @Override
     public PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId) {
         Map map =turnToMap(page,size);
         map.put("userId",userId);

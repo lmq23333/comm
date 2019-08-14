@@ -17,4 +17,7 @@
     <select id="selectQuestionsByCreator"  resultType="com.coffee.comm.model.Question">
         select * from question where creator = #{userId} limit #{page},#{size} ;
     </select>
+    <select id="selectQuestionById"  resultType="com.coffee.comm.model.Question">
+        select * from question where id = #{id};
+    </select>
 </mapper>

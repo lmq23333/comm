@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${question.title}]]</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="/css/comm.css"/>
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+<div th:replace="top::#top"></div>
+<div class="container-fluid main" th:if="${msg==null}">
+    <div class="row">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+            <h4><span class="glyphicon" aria-hidden="true">[[${question.title}]]</span></h4>
+            <span class="text-desc">作者：[[${question.user.name}]] | 发布时间：[[${#dates.format(question.gmtCreate,'yyyy-MM-dd')}]]
+                | 浏览次数：[[${question.viewCount}]] </span>
+            <hr/>
+            <div class="media-body">
+                <span>[[${question.description}]]</span>
+                <br>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+            <h3>发起人</h3>
+            <img class="media-object img-rounded" th:src="${question.user.avatar_url}">
+            <span>[[${question.user.name}]]</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

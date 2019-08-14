@@ -39,4 +39,6 @@ public interface QuestionMapper {
     Integer totalCountById(Integer userId);
 
     List<Question> selectQuestionsByCreator(Map map);
+
+    Question selectQuestionById(Integer id);
 }

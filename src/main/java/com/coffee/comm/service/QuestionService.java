@@ -38,4 +38,6 @@ public interface QuestionService {
     PaginationDTO showIndexQuestion(Integer page, Integer size);
 
     PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId);
+
+    QuestionDTO selectQuestionById(Integer id);
 }
