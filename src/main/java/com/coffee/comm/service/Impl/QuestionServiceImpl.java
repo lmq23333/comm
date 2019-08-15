@@ -69,6 +69,19 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
+    public PaginationDTO search(String title, Integer page, Integer size) {
+        Map map = turnToMap(page,size);
+        map.put("title",title);
+        List<Question> questionList =questionMapper.search(map);
+        List<QuestionDTO> questionDTOList = turnToQuestionDTO(questionList);
+        PaginationDTO pagination = new PaginationDTO();
+        Integer totalCount = questionMapper.totalCountByTitle(title);
+        pagination.setPagination(totalCount, page, size);
+        pagination.setQuestions(questionDTOList);
+        return pagination;
+    }
+
+    @Override
     public PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId) {
         Map map =turnToMap(page,size);
         map.put("userId",userId);

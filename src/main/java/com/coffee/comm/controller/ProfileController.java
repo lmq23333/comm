@@ -1,8 +1,6 @@
 package com.coffee.comm.controller;
 
-import com.coffee.comm.dao.QuestionMapper;
 import com.coffee.comm.dto.PaginationDTO;
-import com.coffee.comm.model.Question;
 import com.coffee.comm.model.User;
 import com.coffee.comm.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * ProfileController
@@ -43,9 +38,10 @@ public class ProfileController {
             Integer userId = user.getId();
             PaginationDTO pagination = questionService.showMyQuestion(page, size, userId);
             if(pagination.getQuestions().size()!=0){
-                model.addAttribute("pagination", pagination);
+                model.addAttribute("pagination",pagination );
+                model.addAttribute("address", "/profile/questions?page=");
             }else{
-                model.addAttribute("msg", "0");
+                model.addAttribute("msg", "没有符合要求的话题");
             }
         }
         if("replies".equals(action)){

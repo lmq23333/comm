@@ -39,6 +39,10 @@ public class PaginationDTO {
                 pages.add(page+i);
             }
         }
+        if(totalPage==0){
+            totalPage=1;
+            pages.add(1);
+        }
         if(page==1){
             showPrevious = false;
         }else{

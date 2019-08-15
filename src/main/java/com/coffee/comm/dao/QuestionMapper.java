@@ -41,4 +41,8 @@ public interface QuestionMapper {
     List<Question> selectQuestionsByCreator(Map map);
 
     Question selectQuestionById(Integer id);
+
+    List<Question> search(Map map);
+
+    Integer totalCountByTitle(String title);
 }

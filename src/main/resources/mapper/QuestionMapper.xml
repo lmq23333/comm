@@ -20,4 +20,10 @@
     <select id="selectQuestionById"  resultType="com.coffee.comm.model.Question">
         select * from question where id = #{id};
     </select>
+    <select id="totalCountByTitle"  resultType="Integer">
+        select count(1) from question where title like "%"#{title}"%";
+    </select>
+    <select id="search"  resultType="com.coffee.comm.model.Question">
+        select * from question where title like "%"#{title}"%" limit #{page},#{size} ;
+    </select>
 </mapper>

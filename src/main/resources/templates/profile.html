@@ -14,10 +14,11 @@
 <div th:replace="top::#top"></div>
 <div class="container-fluid main">
     <div class="row">
-        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" th:if="${msg==null}">
+        <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" >
             <h2><span class="glyphicon glyphicon-plus" aria-hidden="true">[[${sectionName}]]</span></h2>
             <hr/>
-            <div class="media" th:each="question :${pagination.questions}">
+            <div th:if="${msg==null}" >
+                <div class="media"  th:each="question :${pagination.questions}">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object img-rounded"
@@ -33,6 +34,7 @@
                     <br>
                     <span class="text-desc">[[${question.commentCount}]] 个回复 · [[${question.viewCount}]] 次浏览 ·[[${#dates.format(question.gmtCreate,'yyyy-MM-dd')}]]</span>
                 </div>
+            </div>
             </div>
             <div th:replace="pagination::#pagination"></div>
         </div>

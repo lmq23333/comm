@@ -5,7 +5,6 @@ import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
 
 import java.util.List;
-import java.util.Map;
 
 /**
   *QuestionService
@@ -40,4 +39,6 @@ public interface QuestionService {
     PaginationDTO showMyQuestion(Integer page, Integer size,Integer userId);
 
     QuestionDTO selectQuestionById(Integer id);
+
+    PaginationDTO search(String title, Integer page, Integer size);
 }

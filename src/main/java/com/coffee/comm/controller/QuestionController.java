@@ -1,7 +1,6 @@
 package com.coffee.comm.controller;
 
 import com.coffee.comm.dto.QuestionDTO;
-import com.coffee.comm.model.User;
 import com.coffee.comm.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +21,7 @@ public class QuestionController {
         if(questionDTO!=null){
             model.addAttribute("question",questionDTO);
         }else{
-            model.addAttribute("msg","error");
+            model.addAttribute("msg","没有符合要求的话题");
         }
 
         return "question";
