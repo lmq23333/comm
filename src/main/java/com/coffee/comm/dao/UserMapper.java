@@ -33,4 +33,8 @@ public interface UserMapper {
      * @date 2019/8/9 17:00
      **/
     User findById(Integer creator);
+
+    User findByAccountId(String account_id);
+
+    void updateUser(User user);
 }

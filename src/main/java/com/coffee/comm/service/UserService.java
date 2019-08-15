@@ -1,6 +1,9 @@
 package com.coffee.comm.service;
 
+import com.coffee.comm.dto.GithubUser;
 import com.coffee.comm.model.User;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * UserService
@@ -30,4 +33,10 @@ public interface UserService {
       **/
     User findById(Integer creator);
 
+    GithubUser login(String client_id, String client_secret,
+                     String redirect_uri, String code, String state);
+
+    User loginSuccess(GithubUser githubUser,HttpServletResponse response);
+
+    void createOrUpdate(User user);
 }

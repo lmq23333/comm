@@ -11,4 +11,11 @@
     <select id="findById" parameterType="Integer" resultType="com.coffee.comm.model.User">
         select * from user where id = #{creator};
     </select>
+    <select id="findByAccountId" parameterType="String" resultType="com.coffee.comm.model.User">
+        select * from user where account_id = #{account_id};
+    </select>
+    <update id="updateUser" parameterType="com.coffee.comm.model.User">
+        update user set name=#{name},token=#{token},gmt_create=#{gmt_create},gmt_modified=#{gmt_modified}
+        ,bio=#{bio},avatar_url=#{avatar_url} where account_id=#{account_id};
+    </update>
 </mapper>
