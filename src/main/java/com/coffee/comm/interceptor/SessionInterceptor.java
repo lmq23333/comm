@@ -9,6 +9,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @Service
 public class SessionInterceptor implements HandlerInterceptor {
@@ -25,11 +26,18 @@ public class SessionInterceptor implements HandlerInterceptor {
                     User user = userService.findByToken(token);
                     if (user != null) {
                         request.getSession().setAttribute("user", user);
+                        return true;
                     }
                     break;
                 }
             }
         }
+//        try {
+////            response.sendRedirect("/index");
+////        } catch (IOException e) {
+////            e.printStackTrace();
+////        }
+////        return false;
         return true;
     }
 

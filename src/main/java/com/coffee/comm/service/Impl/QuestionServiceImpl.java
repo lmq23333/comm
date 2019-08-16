@@ -9,7 +9,9 @@ import com.coffee.comm.service.QuestionService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +40,43 @@ public class QuestionServiceImpl implements QuestionService {
         map.put("page",page);
         map.put("size" ,size);
         return map;
+    }
+
+    @Override
+    public void updateQuestion(Question question) {
+        questionMapper.updateQuestion(question);
+    }
+
+    @Override
+    public String judge(String title, String description, String tag,Model model,HttpServletRequest request) {
+        if (title == null ||"".equals(title)) {
+            model.addAttribute("error", "问题不能为空");
+            return "publish";
+        }
+        if (description == null ||"".equals(description)) {
+            model.addAttribute("error", "问题补充不能为空");
+            return "publish";
+        }
+        if (tag == null ||"".equals(tag)) {
+            model.addAttribute("error", "标签不能为空");
+            return "publish";
+        }
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            model.addAttribute("error", "用户未登录");
+            return "publish";
+        }
+        return null;
+    }
+
+    public Question turnToQuestion(String title,
+                                   String description,
+                                   String tag){
+        Question question = new Question();
+        question.setTitle(title);
+        question.setTag(tag);
+        question.setDescription(description);
+        return question;
     }
     public List<QuestionDTO> turnToQuestionDTO(List<Question> questions){
         List<QuestionDTO> questionDTOList = new ArrayList<>();

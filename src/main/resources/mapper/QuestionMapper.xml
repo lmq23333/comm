@@ -26,4 +26,8 @@
     <select id="search"  resultType="com.coffee.comm.model.Question">
         select * from question where title like "%"#{title}"%" limit #{page},#{size} ;
     </select>
+    <update id="updateQuestion" parameterType="com.coffee.comm.model.Question">
+        update question set title=#{title},description=#{description},
+        gmtCreate=#{gmtCreate},gmtModified=#{gmtModified},tag=#{tag} where id=#{id};
+    </update>
 </mapper>

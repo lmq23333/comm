@@ -28,7 +28,6 @@
                     <a th:href="@{'/question/'+${question.id}}">
                     <h4 class="media-heading">[[${question.title}]]</h4>
                     </a>
-                    <br>
                     <span class="text-desc">[[${question.commentCount}]] 个回复 · [[${question.viewCount}]] 次浏览 ·[[${#dates.format(question.gmtCreate,'yyyy-MM-dd')}]]</span>
                 </div>
             </div>

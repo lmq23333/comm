@@ -45,4 +45,6 @@ public interface QuestionMapper {
     List<Question> search(Map map);
 
     Integer totalCountByTitle(String title);
+
+    void updateQuestion(Question question);
 }

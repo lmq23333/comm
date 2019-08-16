@@ -3,7 +3,11 @@ package com.coffee.comm.service;
 import com.coffee.comm.dto.PaginationDTO;
 import com.coffee.comm.dto.QuestionDTO;
 import com.coffee.comm.model.Question;
+import com.coffee.comm.model.User;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -41,4 +45,12 @@ public interface QuestionService {
     QuestionDTO selectQuestionById(Integer id);
 
     PaginationDTO search(String title, Integer page, Integer size);
+
+    Question turnToQuestion(String title,
+                                   String description,
+                                   String tag);
+
+    String judge(String title, String description, String tag,Model model,HttpServletRequest request);
+
+    void updateQuestion(Question question);
 }
